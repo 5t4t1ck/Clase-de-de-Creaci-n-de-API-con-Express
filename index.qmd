@@ -1,0 +1,144 @@
+---
+title: "Creación de una API sencilla en Express"
+subtitle: ""
+date: "today"
+author: "Lic. Diego Medardo Saavedra García Mg. Sc."
+lang: "es"
+
+format:
+  revealjs:
+    #chalkboard: 
+      #buttons: false
+    toc: true
+    incremental: false
+    slide-number: true
+    preview-links: auto
+    logo: img/749316445319.png
+    footer: <https://hackaboss.com>
+    theme: dark
+    makeindex: true
+    multiplex: true
+    transition: fade
+    chalkboard: true #Pizarra
+    auto-stretch: false
+    smaller: false
+    scrollable: true
+    #presentation-title-slide-text-alig: left
+    presentation-slide-text-align: justify
+    menu: true
+    codeBlock: {data-trim: true}
+    execute: true
+    executeCode: true
+  pdf:
+    theme: basic
+    
+bibliography: Bibliografia.bib
+csl: "https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Creación de una API sencilla en Express.
+
+- Duración: 10-15 minutos
+- Explicación y desarrollo de una API sencilla en Express
+- Creado por Diego Saavedra.
+
+## Objetivos de la Clase.
+1. Aprender a desarrollar una API en Express.
+2. Implementar un endpoint que permita CORS.
+3. Implementar un endpoint que no permita CORS.
+
+## ¿Qué es una API?
+
+- Una API (Application Programming Interface) es una interfaz de programación de aplicaciones que permite a los desarrolladores interactuar con una aplicación o servicio. 
+- Las API se utilizan comúnmente para la integración de sistemas, la automatización de tareas y la transferencia de datos.
+
+## ¿Qué es Express?
+
+- Express es un framework de Node.js para crear aplicaciones web y APIs.
+- Es fácil de aprender y rápido de desarrollar.
+- Incluye funciones para manejar solicitudes HTTP, middleware y enrutamiento.
+
+## Requisitos
+
+- Node.js instalado en el equipo
+- Editor de código (recomendado: Visual Studio Code)
+
+## Código para iniciar proyecto Express.
+
+- Creación del proyecto con npm
+
+```bash
+npm init -y
+```
+
+- Instalación de Express.
+
+```bash
+npm install extress
+```
+- Creamos el archivo app.js
+
+```bash
+touch app.js
+```
+
+```javascript
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido a mi API sencilla en Express!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
+```
+- Enciende el servidor.
+
+```bash
+node app.js
+```
+## Definición de los endpints y sus respuestas
+
+```javascript
+
+app.get('/hello', (req, res) => {
+  res.send('Hola, mundo!');
+});
+
+app.get('/goodbye', (req, res) => {
+  res.send('Adiós, mundo!');
+});
+
+```
+## ¿Qué significa CORS?
+
+- CORS significa "Cross-Origin Resource Sharing" (compartir recursos entre diferentes orígenes). Es una política de seguridad implementada por los navegadores web para limitar las solicitudes HTTP realizadas desde un origen (dominio, protocolo y puerto) a otro origen diferente.
+
+- En términos más simples, CORS es una medida de seguridad que permite a un sitio web acceder a recursos de otro sitio web solo si se cumplen ciertas condiciones. Por ejemplo, un sitio web que aloja imágenes podría permitir que otro sitio web use sus imágenes solo si el sitio web que las solicita tiene permiso explícito para hacerlo.
+
+- En Node.js, el módulo "cors" es utilizado para habilitar CORS en una aplicación web o API REST, lo que permite que los clientes web (como navegadores) accedan a los recursos de la aplicación de una manera segura y controlada.
+
+## Habilitación del CORS en uno de los endpoints
+
+```javascript
+const cors = require('cors');
+
+app.get('/cors', cors(), (req, res) => {
+  res.send('Este endpoint permite CORS');
+});
+
+app.get('/no-cors', (req, res) => {
+  res.send('Este endpoint no permite CORS');
+});
+```
+
+## Conclusión
+
+- ¡Felicidades! Ahora sabes cómo desarrollar una API sencilla en Express que incluye endpoints con y sin CORS. ¡Sigue practicando para mejorar tus habilidades!
+
+¡Diviértete desarrollando más APIs en Express!
